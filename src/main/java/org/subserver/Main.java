@@ -26,6 +26,7 @@ public class Main {
 
     }
 
+
     public static HashMap<String, ServerInfo> serversOnline = new HashMap<String, ServerInfo>();
 
     public static void main(String[] args) throws Exception 
@@ -48,8 +49,8 @@ public class Main {
                 }
             }
         });
-
-        String command = "";
+        
+        String option = "";
 
         Scanner scanner = new Scanner(System.in);
 
@@ -73,12 +74,10 @@ public class Main {
             System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
             
             System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
+        
+            option = scanner.nextLine();
 
-            command = "";
-
-            command = scanner.nextLine();
-
-            switch (command) 
+            switch (option) 
             {
                 case "1": 
                 {
@@ -99,7 +98,9 @@ public class Main {
                 case "4": 
                 {
                     System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
+                    
                     String name = scanner.nextLine();
+                    
                     ServerInfo serverInfo = serversOnline.get(name);
 
                     if (serverInfo == null) {
@@ -119,6 +120,7 @@ public class Main {
                         System.out.println(ConsoleColors.ANSI_CYAN + "=============================================================" + ConsoleColors.ANSI_RESET);
                         System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
                     
+                        
                         String command2 = scanner.nextLine();
 
                         if (command2.equalsIgnoreCase("l")) 
@@ -161,6 +163,7 @@ public class Main {
                         {}
                     }
                     scanner.close();
+
                     System.exit(0);
                 }
                 default: 
@@ -171,7 +174,7 @@ public class Main {
                 }
             }
     } 
-    while (command != "stop" && command != "5");
+    while (!option.equalsIgnoreCase("stop") || !option.equalsIgnoreCase("5"));
     
 
     }
