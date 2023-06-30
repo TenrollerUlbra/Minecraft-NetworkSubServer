@@ -2,10 +2,17 @@ package org.subserver.functions;
 
 import org.subserver.interfaces.ConsoleColors;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Scanner;
 
 public class CreateProcess {
@@ -50,6 +57,73 @@ public class CreateProcess {
             writer.write(str);
             
             writer.close();
+
+            System.out.println("You will need to have a server jar inside the folder, would you like to download one now ?");
+
+            System.out.print(ConsoleColors.ANSI_YELLOW + "Type yes or no: " + ConsoleColors.ANSI_RESET);
+
+            String answer = scanner.nextLine();
+
+            if (answer.equals("yes")) 
+            {
+            
+                System.out.println("By default, we will download the latest version of papermc\nbut you can change this in the server folder :D.");
+
+                System.out.println("Downloading...");
+
+                 String jarUrl = "https://serverjars.com/api/fetchJar/servers/paper"; 
+                 
+                 String destinationPath = "./subservers/" + name + "/server.jar"; 
+
+                    try {
+                        // Create URL object
+                        URL url = new URL(jarUrl);
+
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                        connection.setRequestMethod("GET");
+
+                        int responseCode = connection.getResponseCode();
+
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                            
+                            InputStream inputStream = connection.getInputStream();
+                            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+
+                            // Create output stream to write the data to a file
+                            FileOutputStream fileOutputStream = new FileOutputStream(destinationPath);
+
+                            // Read data from the input stream and write it to the output stream
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            while ((bytesRead = bufferedInputStream.read(buffer)) != -1) {
+                                fileOutputStream.write(buffer, 0, bytesRead);
+                            }
+
+                            // Close streams
+                            fileOutputStream.close();
+                            bufferedInputStream.close();
+                            inputStream.close();
+
+                            System.out.println("JAR file downloaded successfully.");
+                        } 
+                        else 
+                        {
+                            System.out.println("Failed to download JAR file. Response Code: " + responseCode);
+                        }
+
+                        // Close the connection
+                        connection.disconnect();
+                    } catch (IOException e) 
+                    {
+                        e.printStackTrace();
+                    }
+
+            
+            }
+
+
+
             
             System.out.println(ConsoleColors.ANSI_GREEN + "Server created sucessful! Now, up your server from folder subservers/" + name + " and configure subserverprocess.conf." + ConsoleColors.ANSI_RESET);
         }

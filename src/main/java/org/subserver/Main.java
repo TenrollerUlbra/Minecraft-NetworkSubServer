@@ -4,7 +4,6 @@ import org.subserver.interfaces.ConsoleColors;
 import org.subserver.models.ServerInfo;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -30,15 +29,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER      " + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_BLUE + "HELP COMMANDS - Version v1.0" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_BLUE + "                             " + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "1" + ConsoleColors.ANSI_CYAN + "]" + "- Create a subserver" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "2" + ConsoleColors.ANSI_CYAN + "]" + "- Start a server" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "3" + ConsoleColors.ANSI_CYAN + "]" + "- KILL A SERVER" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "4" + ConsoleColors.ANSI_CYAN + "]" + "- Verify Server info" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "5" + ConsoleColors.ANSI_CYAN + "]" + "- Stop SubProcess manager" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_PURPLE + "HELP COMMANDS" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_PURPLE + "                             " + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_PURPLE + "1" + ConsoleColors.ANSI_CYAN + "]" + "- Create a subserver" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_PURPLE + "2" + ConsoleColors.ANSI_CYAN + "]" + "- Start a server" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_PURPLE + "3" + ConsoleColors.ANSI_CYAN + "]" + "- KILL A SERVER" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_PURPLE + "4" + ConsoleColors.ANSI_CYAN + "]" + "- Verify Server info" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_PURPLE + "5" + ConsoleColors.ANSI_CYAN + "]" + "- Stop SubProcess manager" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_CYAN + "" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
         
@@ -48,12 +47,6 @@ public class Main {
         String command = scanner.nextLine();
         
         switch (command) {
-            default: {
-                System.out.println(ConsoleColors.ANSI_RED + "Command not found!" + ConsoleColors.ANSI_RESET);
-                main(args);
-                scanner.close();
-                break;
-            }
             case "1": {
                 createProcess();
                 scanner.close();
@@ -70,12 +63,14 @@ public class Main {
                 System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
                 String name = scanner.nextLine();
                 ServerInfo serverInfo = serversOnline.get(name);
+
                 if (serverInfo == null) {
                     System.out.println(ConsoleColors.ANSI_RED + "Server not found!" + ConsoleColors.ANSI_RESET);
                     main(args);
                     scanner.close();
                     return;
                 }
+
                 System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
@@ -113,6 +108,12 @@ public class Main {
                     } catch (IOException ignored) {}
                 }
                 System.exit(0);
+            }
+            default: {
+                System.out.println(ConsoleColors.ANSI_RED + "Command not found!" + ConsoleColors.ANSI_RESET);
+                main(args);
+                scanner.close();
+                break;
             }
         }
     }
