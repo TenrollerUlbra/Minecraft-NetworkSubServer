@@ -24,11 +24,17 @@ public class CreateProcess {
             SubserversFolder.mkdir();
         }
     
-            System.out.print(ConsoleColors.ANSI_YELLOW + "Type the name of server: " + ConsoleColors.ANSI_RESET);
+            System.out.print(ConsoleColors.ANSI_YELLOW + "(type C to cancel)\nType the name of the server:" + ConsoleColors.ANSI_RESET);
             
             String name = scanner.nextLine();
             
             name = name.toLowerCase();
+
+            if (name.equals("c")) 
+            {
+                System.out.println(ConsoleColors.ANSI_RED + "Canceled!" + ConsoleColors.ANSI_RESET);
+                return;
+            }
 
             File SubserverFolder = new File("./subservers/" + name);
             
@@ -122,6 +128,7 @@ public class CreateProcess {
                 
                 }
                 
+
                 System.out.println(ConsoleColors.ANSI_GREEN + "Server created sucessful! Now, up your server from folder subservers/" + name + " and configure subserverprocess.conf." + ConsoleColors.ANSI_RESET);
         }
 

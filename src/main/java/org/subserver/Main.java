@@ -27,7 +27,7 @@ public class Main {
                 "/\\__/ /| |_| || |_) |/\\__/ /|  __/| |    \\ V / |  __/| |   \\__ \\\r\n" + //
                 "\\____/  \\__,_||_.__/ \\____/  \\___||_|     \\_/   \\___||_|   |___/\r\n" + //
                 "                                                                \r" + //
-                "                                                                "+  "\nBy Tenroller <3" + ConsoleColors.ANSI_RESET);        
+                "                                                                "+  "By Tenroller <3" + ConsoleColors.ANSI_RESET);
 
     }
 
@@ -124,10 +124,10 @@ public class Main {
                         System.out.println(ConsoleColors.ANSI_CYAN + "Server: "+ server.name + " - Valid: "+ valid + ConsoleColors.ANSI_RESET);
                     }
 
-                    System.out.println(ConsoleColors.ANSI_CYAN + "If the server has a Jar inside it will be checked as valid :D" + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "NOTE: A server is counted as valid if it has a server.jar inside" + ConsoleColors.ANSI_RESET);
 
                  
-                    System.out.println(ConsoleColors.ANSI_CYAN + "\n===========================================================" + ConsoleColors.ANSI_RESET); 
+                    System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET); 
 
 
                     System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
