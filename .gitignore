@@ -3,6 +3,9 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+!**/src/main/**/build.gradle
+!**/src/test/**/build.gradle
+**/subservers/**
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

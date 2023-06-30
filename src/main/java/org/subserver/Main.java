@@ -12,6 +12,21 @@ import static org.subserver.functions.StartServerProcess.startServerProcess;
 
 public class Main {
 
+    static void ShowLogo()
+    {
+
+        System.out.println(ConsoleColors.ANSI_CYAN + " _____         _      _____                                     \r\n" + //
+                "/  ___|       | |    /  ___|                                    \r\n" + //
+                "\\ `--.  _   _ | |__  \\ `--.   ___  _ __ __   __  ___  _ __  ___ \r\n" + //
+                " `--. \\| | | || '_ \\  `--. \\ / _ \\| '__|\\ \\ / / / _ \\| '__|/ __|\r\n" + //
+                "/\\__/ /| |_| || |_) |/\\__/ /|  __/| |    \\ V / |  __/| |   \\__ \\\r\n" + //
+                "\\____/  \\__,_||_.__/ \\____/  \\___||_|     \\_/   \\___||_|   |___/\r\n" + //
+                "                                                                \r\n" + //
+                "                                                                " + "\n By Tenroller <3\n" + ConsoleColors.ANSI_RESET);        
+
+    }
+
+
     public static HashMap<String, ServerInfo> serversOnline = new HashMap<String, ServerInfo>();
 
     public static void main(String[] args) throws Exception {
@@ -26,10 +41,10 @@ public class Main {
             }
         });
 
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER      " + ConsoleColors.ANSI_RESET);
+        ShowLogo();
+
+        Scanner scanner = new Scanner(System.in);
         System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "HELP COMMANDS" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "                             " + ConsoleColors.ANSI_RESET);
@@ -46,75 +61,84 @@ public class Main {
         
         String command = scanner.nextLine();
         
-        switch (command) {
-            case "1": {
-                createProcess();
-                scanner.close();
-                break;
-            }
-            case "2": {
-                System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
-                String name = scanner.nextLine();
-                startServerProcess(name, args, serversOnline);
-                scanner.close();
-                break;
-            }
-            case "4": {
-                System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
-                String name = scanner.nextLine();
-                ServerInfo serverInfo = serversOnline.get(name);
+        while(command != "5")
+        {
 
-                if (serverInfo == null) {
-                    System.out.println(ConsoleColors.ANSI_RED + "Server not found!" + ConsoleColors.ANSI_RESET);
+            switch (command) 
+            {
+                case "1": 
+                {
+                    createProcess();
+                    scanner.close();
+                    break;
+                }
+                case "2": 
+                {
+                    System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
+                    String name = scanner.nextLine();
+                    startServerProcess(name, args, serversOnline);
+                    scanner.close();
+                    break;
+                }
+                case "4": 
+                {
+                    System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
+                    String name = scanner.nextLine();
+                    ServerInfo serverInfo = serversOnline.get(name);
+
+                    if (serverInfo == null) {
+                        System.out.println(ConsoleColors.ANSI_RED + "Server not found!" + ConsoleColors.ANSI_RESET);
+                        main(args);
+                        scanner.close();
+                        return;
+                    }
+
+                    System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_BLUE + "SERVER INFO - " + name + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "                             " + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "Server name: " + serverInfo.getName() + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "Server PID: " + serverInfo.getPID() + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "PRESS L TO VIEW LOGS SERVER AND PRESS S TO STOP" + ConsoleColors.ANSI_RESET);
+                    System.out.println(ConsoleColors.ANSI_CYAN + "=============================================================" + ConsoleColors.ANSI_RESET);
+                    System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
+                    String command2 = scanner.nextLine();
+                    if (command2.equalsIgnoreCase("l")) {
+                        String stop = scanner.nextLine();
+                        while (true) {
+                            System.out.print("\033[H\033[2J");
+                            if (stop.equalsIgnoreCase("s")) {
+                                main(args);
+                                break;
+                            }
+                            Thread.sleep(1000);
+                        }
+                    }
+                    break;
+                }
+                case "5": {
+                    System.out.println(ConsoleColors.ANSI_RED + "Stopping SubProcess manager..." + ConsoleColors.ANSI_RESET);
+                    System.exit(0);
+                    break;
+                }
+                case "stop": {
+                    for (ServerInfo serverInfo : serversOnline.values()) {
+                        try {
+                            ProcessBuilder processBuilder = new ProcessBuilder("kill", "-9", String.valueOf(serverInfo.getPID()));
+                            processBuilder.start();
+                        } catch (IOException ignored) {}
+                    }
+                    System.exit(0);
+                }
+                default: {
+                    System.out.println(ConsoleColors.ANSI_RED + "Command not found!" + ConsoleColors.ANSI_RESET);
                     main(args);
                     scanner.close();
-                    return;
+                    break;
                 }
+        }
 
-                System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_BLUE + "SERVER INFO - " + name + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "                             " + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "Server name: " + serverInfo.getName() + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "Server PID: " + serverInfo.getPID() + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "PRESS L TO VIEW LOGS SERVER AND PRESS S TO STOP" + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_CYAN + "=============================================================" + ConsoleColors.ANSI_RESET);
-                System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
-                String command2 = scanner.nextLine();
-                if (command2.equalsIgnoreCase("l")) {
-                    String stop = scanner.nextLine();
-                    while (true) {
-                        System.out.print("\033[H\033[2J");
-                        if (stop.equalsIgnoreCase("s")) {
-                            main(args);
-                            break;
-                        }
-                        Thread.sleep(1000);
-                    }
-                }
-                break;
-            }
-            case "5": {
-                System.out.println(ConsoleColors.ANSI_RED + "Stopping SubProcess manager..." + ConsoleColors.ANSI_RESET);
-                System.exit(0);
-                break;
-            }
-            case "stop": {
-                for (ServerInfo serverInfo : serversOnline.values()) {
-                    try {
-                        ProcessBuilder processBuilder = new ProcessBuilder("kill", "-9", String.valueOf(serverInfo.getPID()));
-                        processBuilder.start();
-                    } catch (IOException ignored) {}
-                }
-                System.exit(0);
-            }
-            default: {
-                System.out.println(ConsoleColors.ANSI_RED + "Command not found!" + ConsoleColors.ANSI_RESET);
-                main(args);
-                scanner.close();
-                break;
-            }
         }
     }
 }

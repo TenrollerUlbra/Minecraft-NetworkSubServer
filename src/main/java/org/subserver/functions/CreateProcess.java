@@ -3,14 +3,12 @@ package org.subserver.functions;
 import org.subserver.interfaces.ConsoleColors;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -36,6 +34,7 @@ public class CreateProcess {
         
         name = name.toLowerCase();
 
+
         File SubserverFolder = new File("./subservers/" + name);
         
         if (SubserverFolder.exists()) 
@@ -58,7 +57,7 @@ public class CreateProcess {
             
             writer.close();
 
-            System.out.println("You will need to have a server jar inside the folder, would you like to download one now ?");
+            System.out.println(ConsoleColors.ANSI_YELLOW + "You will need to have a server jar inside the server folder, would you like to download one now ?" + ConsoleColors.ANSI_RESET);
 
             System.out.print(ConsoleColors.ANSI_YELLOW + "Type yes or no: " + ConsoleColors.ANSI_RESET);
 
@@ -67,9 +66,9 @@ public class CreateProcess {
             if (answer.equals("yes")) 
             {
             
-                System.out.println("By default, we will download the latest version of papermc\nbut you can change this in the server folder :D.");
+                System.out.println(ConsoleColors.ANSI_YELLOW + "By default, we will download the latest version of papermc\nbut you can change this in the server folder :D." + ConsoleColors.ANSI_RESET);
 
-                System.out.println("Downloading...");
+                System.out.println(ConsoleColors.ANSI_YELLOW + "Downloading..." + ConsoleColors.ANSI_RESET);
 
                  String jarUrl = "https://serverjars.com/api/fetchJar/servers/paper"; 
                  
@@ -105,7 +104,7 @@ public class CreateProcess {
                             bufferedInputStream.close();
                             inputStream.close();
 
-                            System.out.println("JAR file downloaded successfully.");
+                            System.out.println(ConsoleColors.ANSI_GREEN + "JAR file downloaded successfully." + ConsoleColors.ANSI_RESET);
                         } 
                         else 
                         {
@@ -121,13 +120,11 @@ public class CreateProcess {
 
             
             }
-
-
-
             
             System.out.println(ConsoleColors.ANSI_GREEN + "Server created sucessful! Now, up your server from folder subservers/" + name + " and configure subserverprocess.conf." + ConsoleColors.ANSI_RESET);
         }
         
+        scanner.close();
         
     }
 }
