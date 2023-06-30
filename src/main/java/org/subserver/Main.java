@@ -4,7 +4,6 @@ import org.subserver.interfaces.ConsoleColors;
 import org.subserver.models.Server;
 import org.subserver.models.ServerInfo;
 
-import lombok.val;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -122,15 +121,15 @@ public class Main {
                     {                        
                         String valid = "";
 
-                        valid = server.isValid ? "✓" : "X";
+                        valid = server.isValid ? "Y" : "N";
 
                         System.out.println(ConsoleColors.ANSI_CYAN + "Server: "+ server.name + " - Valid: "+ valid + ConsoleColors.ANSI_RESET);
                     }
-                 
-                    System.out.println(ConsoleColors.ANSI_CYAN + "\n===========================================================" + ConsoleColors.ANSI_RESET); 
 
                     System.out.println(ConsoleColors.ANSI_CYAN + "If the server has a Jar inside it will be checked as valid :D" + ConsoleColors.ANSI_RESET);
 
+                 
+                    System.out.println(ConsoleColors.ANSI_CYAN + "\n===========================================================" + ConsoleColors.ANSI_RESET); 
 
 
                     System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);

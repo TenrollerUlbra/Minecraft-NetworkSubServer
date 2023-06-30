@@ -25,7 +25,7 @@ public class CreateProcess {
         }
             Scanner scanner = new Scanner(System.in);
     
-            System.out.print(ConsoleColors.ANSI_YELLOW + "Type name of server: " + ConsoleColors.ANSI_RESET);
+            System.out.print(ConsoleColors.ANSI_YELLOW + "Type the name of server: " + ConsoleColors.ANSI_RESET);
             
             String name = scanner.nextLine();
             
@@ -35,7 +35,7 @@ public class CreateProcess {
             
             if (SubserverFolder.exists()) 
             {
-                System.out.println(ConsoleColors.ANSI_RED + "Server already exists! " + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_RED + "A server with this name already exists !" + ConsoleColors.ANSI_RESET);
             }
             else
             {
@@ -58,6 +58,9 @@ public class CreateProcess {
                 System.out.print(ConsoleColors.ANSI_YELLOW + "Type yes or no: " + ConsoleColors.ANSI_RESET);
 
                 String answer = scanner.nextLine();
+
+                //Just in case the user types in uppercase
+                answer = answer.toLowerCase();
 
                 if (answer.equals("yes")) 
                 {
