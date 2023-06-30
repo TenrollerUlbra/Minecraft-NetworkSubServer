@@ -27,7 +27,7 @@ public class Main {
                 "/\\__/ /| |_| || |_) |/\\__/ /|  __/| |    \\ V / |  __/| |   \\__ \\\r\n" + //
                 "\\____/  \\__,_||_.__/ \\____/  \\___||_|     \\_/   \\___||_|   |___/\r\n" + //
                 "                                                                \r" + //
-                "                                                                " + ConsoleColors.ANSI_RESET);        
+                "                                                                "+  "\nBy Tenroller <3" + ConsoleColors.ANSI_RESET);        
 
     }
 
