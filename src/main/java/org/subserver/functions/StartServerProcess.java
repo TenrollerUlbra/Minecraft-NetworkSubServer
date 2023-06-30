@@ -15,12 +15,10 @@ public class StartServerProcess {
     public static void startServerProcess(String name, String[] args, HashMap<String, ServerInfo> serversOnline) throws Exception {
         
         System.out.print("\033[H\033[2J");
-        
+       
         System.out.println(ConsoleColors.ANSI_YELLOW + "o - Checking if server exists" + ConsoleColors.ANSI_RESET);
 
-
-        File file = new File("./subservers/" + name);
-        
+        File file = new File("./subservers/" + name);       
        
         if (!file.exists()) 
         {
@@ -174,7 +172,7 @@ public class StartServerProcess {
 
         } else 
         {
-            throw new UnsupportedOperationException("Obter PID não é suportado nesta plataforma.");
+            throw new UnsupportedOperationException("There is no support for this operating system");
         }
     }
 }

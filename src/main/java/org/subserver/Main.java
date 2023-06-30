@@ -6,6 +6,7 @@ import org.subserver.models.ServerInfo;
 
 
 import java.io.IOException;
+import java.rmi.ConnectIOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -93,13 +94,38 @@ public class Main {
                 }
                 case "2": 
                 {
-                    System.out.print(ConsoleColors.ANSI_BLUE + "Type name of server: " + ConsoleColors.ANSI_RESET);
+
+                    List<Server> servers = listallservers();
+
+                    if(servers.size() == 0)
+                    {
+                        System.out.println(ConsoleColors.ANSI_RED + "No servers found!" + ConsoleColors.ANSI_RESET);
+                        break;
+                    }
+                    else
+                    {
                     
-                    String name = scanner.nextLine();
+                        System.out.println(ConsoleColors.ANSI_BLUE + "List of valid servers created:");
+
+                        for (Server server : servers) 
+                        {
+                            if(server.isValid)
+                            {
+                                System.out.println(ConsoleColors.ANSI_CYAN + "o - " +server.name);
+                            }
+                        }
+
+                        System.out.println(ConsoleColors.ANSI_BLUE + "Type the name of server: " + ConsoleColors.ANSI_RESET);
                     
-                    startServerProcess(name, args, serversOnline);
+                        String name = scanner.nextLine();
+                                        
+                        startServerProcess(name, args, serversOnline);
                     
-                    break;
+                        break;
+
+
+                    }
+                 
                 }
                 case "3":
                 {
