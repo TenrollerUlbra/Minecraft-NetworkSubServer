@@ -8,8 +8,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static org.subserver.Main.main;
-
 public class StartServerProcess {
     
     public static void startServerProcess(String name, String[] args, HashMap<String, ServerInfo> serversOnline) throws Exception {
@@ -30,7 +28,7 @@ public class StartServerProcess {
             System.out.println(ConsoleColors.ANSI_RED + "SERVER NOT FOUND. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-            main(args);
+  
             return;
         }
         
@@ -43,7 +41,7 @@ public class StartServerProcess {
             System.out.println(ConsoleColors.ANSI_RED + "ERROR - SERVER IS ONLINE. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-            main(args);
+           
             return;
         }
 
@@ -57,7 +55,7 @@ public class StartServerProcess {
             System.out.println(ConsoleColors.ANSI_RED + "ERROR - CONFIG FILE FOR THIS SERVER WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-            main(args);
+           
             return;
         }
         
@@ -71,7 +69,7 @@ public class StartServerProcess {
             System.out.println(ConsoleColors.ANSI_RED + "ERROR - SERVER JAR WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-            main(args);
+          
             return;
         }
 
@@ -108,7 +106,7 @@ public class StartServerProcess {
                 System.out.println(ConsoleColors.ANSI_RED + "ERROR - YOU NEED TO AGREE TO THE EULA IN ORDER TO RUN THE SERVER. GO TO EULA.TXT FOR MORE INFO. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
                 Thread.sleep(5000);
                 System.out.print("\033[H\033[2J");
-                main(args);
+               
                 return;
             }
             if (line.contains("For help, type \"help\"")) {
@@ -119,7 +117,7 @@ public class StartServerProcess {
                 serversOnline.put(name, serverInfo);
                 Thread.sleep(5000);
                 System.out.print("\033[H\033[2J");
-                main(args);
+             
             }
             ServerInfo serverInfo = serversOnline.get(name);
             if (serverInfo != null && serverInfo.getLogs() != null) {

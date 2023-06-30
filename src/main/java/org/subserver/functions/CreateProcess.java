@@ -121,9 +121,6 @@ public class CreateProcess {
                 }
                 
                 System.out.println(ConsoleColors.ANSI_GREEN + "Server created sucessful! Now, up your server from folder subservers/" + name + " and configure subserverprocess.conf." + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
-
-                scanner.nextLine();
         }
 
     }

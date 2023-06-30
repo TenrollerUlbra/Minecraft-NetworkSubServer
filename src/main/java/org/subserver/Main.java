@@ -1,14 +1,19 @@
 package org.subserver;
 
 import org.subserver.interfaces.ConsoleColors;
+import org.subserver.models.Server;
 import org.subserver.models.ServerInfo;
+
+import lombok.val;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.subserver.functions.CreateProcess.createProcess;
 import static org.subserver.functions.StartServerProcess.startServerProcess;
+import static org.subserver.functions.ListServers.listallservers;
 
 public class Main {
 
@@ -83,6 +88,10 @@ public class Main {
                 {
                     createProcess();
 
+                    System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
+
+                    scanner.nextLine();
+
                     break;
                 }
                 case "2": 
@@ -93,6 +102,41 @@ public class Main {
                     
                     startServerProcess(name, args, serversOnline);
                     
+                    break;
+                }
+                case "3":
+                {
+                    System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+
+                    List<Server> servers = listallservers();
+
+                    if(servers.size() == 0)
+                    {
+                        System.out.println(ConsoleColors.ANSI_RED + "No servers found!" + ConsoleColors.ANSI_RESET);
+                        break;
+                    }
+
+                    System.out.println(ConsoleColors.ANSI_CYAN + "      List of servers created          \n" + ConsoleColors.ANSI_RESET);
+
+                    for (Server server : servers) 
+                    {                        
+                        String valid = "";
+
+                        valid = server.isValid ? "✓" : "X";
+
+                        System.out.println(ConsoleColors.ANSI_CYAN + "Server: "+ server.name + " - Valid: "+ valid + ConsoleColors.ANSI_RESET);
+                    }
+                 
+                    System.out.println(ConsoleColors.ANSI_CYAN + "\n===========================================================" + ConsoleColors.ANSI_RESET); 
+
+                    System.out.println(ConsoleColors.ANSI_CYAN + "If the server has a Jar inside it will be checked as valid :D" + ConsoleColors.ANSI_RESET);
+
+
+
+                    System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
+
+                    scanner.nextLine();
+
                     break;
                 }
                 case "4": 
