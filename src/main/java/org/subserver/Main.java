@@ -26,21 +26,27 @@ public class Main {
                 }
             }
         });
-        System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_BLUE + "HELP COMMANDS - Version v1.0" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_BLUE + "                             " + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "[" + ConsoleColors.ANSI_RED + "1" + ConsoleColors.ANSI_YELLOW + "]" + "- Create a subserver" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "[" + ConsoleColors.ANSI_RED + "2" + ConsoleColors.ANSI_YELLOW + "]" + "- Start a server" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "[" + ConsoleColors.ANSI_RED + "3" + ConsoleColors.ANSI_YELLOW + "]" + "- KILL A SERVER" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "[" + ConsoleColors.ANSI_RED + "4" + ConsoleColors.ANSI_YELLOW + "]" + "- Verify Server info" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "[" + ConsoleColors.ANSI_RED + "5" + ConsoleColors.ANSI_YELLOW + "]" + "- Stop SubProcess manager" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
-        Scanner scanner = new Scanner(System.in);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "1" + ConsoleColors.ANSI_CYAN + "]" + "- Create a subserver" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "2" + ConsoleColors.ANSI_CYAN + "]" + "- Start a server" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "3" + ConsoleColors.ANSI_CYAN + "]" + "- KILL A SERVER" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "4" + ConsoleColors.ANSI_CYAN + "]" + "- Verify Server info" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "[" + ConsoleColors.ANSI_RED + "5" + ConsoleColors.ANSI_CYAN + "]" + "- Stop SubProcess manager" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+        
+        
         System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
+        
         String command = scanner.nextLine();
+        
         switch (command) {
             default: {
                 System.out.println(ConsoleColors.ANSI_RED + "Command not found!" + ConsoleColors.ANSI_RESET);
@@ -70,15 +76,15 @@ public class Main {
                     scanner.close();
                     return;
                 }
-                System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_YELLOW + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_BLUE + "SERVER INFO - " + name + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "                             " + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "Server name: " + serverInfo.getName() + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "Server PID: " + serverInfo.getPID() + ConsoleColors.ANSI_RESET);
                 System.out.println(ConsoleColors.ANSI_CYAN + "PRESS L TO VIEW LOGS SERVER AND PRESS S TO STOP" + ConsoleColors.ANSI_RESET);
-                System.out.println(ConsoleColors.ANSI_YELLOW + "=============================================================" + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_CYAN + "=============================================================" + ConsoleColors.ANSI_RESET);
                 System.out.print(ConsoleColors.ANSI_BLUE + "Enter a command: " + ConsoleColors.ANSI_RESET);
                 String command2 = scanner.nextLine();
                 if (command2.equalsIgnoreCase("l")) {
