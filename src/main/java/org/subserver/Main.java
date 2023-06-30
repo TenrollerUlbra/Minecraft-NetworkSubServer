@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
 import static org.subserver.functions.CreateProcess.createProcess;
 import static org.subserver.functions.StartServerProcess.startServerProcess;
 import static org.subserver.functions.ListServers.listallservers;
@@ -31,30 +32,26 @@ public class Main {
     }
 
 
-    public static HashMap<String, ServerInfo> serversOnline = new HashMap<String, ServerInfo>();
+    public static HashMap<String, ServerInfo> serversOnline = new HashMap<>();
 
     public static void main(String[] args) throws Exception 
     {
-        Runtime.getRuntime().addShutdownHook(new Thread() 
-        {
-            public void run() 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (ServerInfo serverInfo : serversOnline.values())
             {
-                for (ServerInfo serverInfo : serversOnline.values()) 
+                try
                 {
-                    try 
-                    {
-                        ProcessBuilder processBuilder = new ProcessBuilder("kill", "-9", String.valueOf(serverInfo.getPID()));
-                        processBuilder.start();
-                    } 
-                    catch (IOException ignored) 
-                    {
+                    ProcessBuilder processBuilder = new ProcessBuilder("kill", "-9", String.valueOf(serverInfo.getPID()));
+                    processBuilder.start();
+                }
+                catch (IOException ignored)
+                {
 
-                    }
                 }
             }
-        });
+        }));
         
-        String option = "";
+        String option;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -119,7 +116,7 @@ public class Main {
 
                     for (Server server : servers) 
                     {                        
-                        String valid = "";
+                        String valid;
 
                         valid = server.isValid ? "Y" : "N";
 
@@ -180,7 +177,7 @@ public class Main {
                                     break;
                                 }
 
-                                Thread.sleep(1000);
+                                sleep(1000);
                             }
                         }
                 
@@ -217,7 +214,7 @@ public class Main {
                 }
             }
     } 
-    while (!option.equalsIgnoreCase("stop") || !option.equalsIgnoreCase("5"));
+    while (true);
     
 
     }
