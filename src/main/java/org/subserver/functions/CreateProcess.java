@@ -15,16 +15,15 @@ import java.util.Scanner;
 
 public class CreateProcess {
 
-    public static void createProcess() throws IOException {
+    public static void createProcess() throws IOException 
+    {
         
-
         File SubserversFolder = new File("./subservers");
         
         // Create folder if not exists
         if (!SubserversFolder.exists()) {
             SubserversFolder.mkdir();
         }
-
         
         Scanner scanner = new Scanner(System.in);
         
@@ -33,7 +32,6 @@ public class CreateProcess {
         String name = scanner.nextLine();
         
         name = name.toLowerCase();
-
 
         File SubserverFolder = new File("./subservers/" + name);
         
@@ -94,7 +92,9 @@ public class CreateProcess {
 
                             // Read data from the input stream and write it to the output stream
                             byte[] buffer = new byte[1024];
+
                             int bytesRead;
+                            
                             while ((bytesRead = bufferedInputStream.read(buffer)) != -1) {
                                 fileOutputStream.write(buffer, 0, bytesRead);
                             }
@@ -122,8 +122,14 @@ public class CreateProcess {
             }
             
             System.out.println(ConsoleColors.ANSI_GREEN + "Server created sucessful! Now, up your server from folder subservers/" + name + " and configure subserverprocess.conf." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
+
+            scanner.nextLine();
+            
+
         }
         
+
         scanner.close();
         
     }
