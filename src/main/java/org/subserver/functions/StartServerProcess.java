@@ -5,7 +5,6 @@ import org.subserver.models.ServerInfo;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -55,22 +54,39 @@ public class StartServerProcess {
         File fileConfig = new File("./subservers/" + name + "/subserverprocess.conf");
         
         if (!fileConfig.exists()) {
-            System.out.println(ConsoleColors.ANSI_RED + "ERROR - CONFIG NOT FOUND. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_RED + "ERROR - CONFIG FILE FOR THIS SERVER WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
             main(args);
             return;
         }
         
+        System.out.println(ConsoleColors.ANSI_GREEN + "STATUS - CHECKINF IF THERE IS A SERVER JAR IN THE FOLDER" + ConsoleColors.ANSI_RESET);
+
+        Thread.sleep(1000);
+
+        File fileJar = new File("./subservers/" + name + "/server.jar");
+
+        if (!fileJar.exists()) {
+            System.out.println(ConsoleColors.ANSI_RED + "ERROR - SERVER JAR WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
+            Thread.sleep(5000);
+            System.out.print("\033[H\033[2J");
+            main(args);
+            return;
+        }
+
         String content = "";
         
         Scanner myReader = new Scanner(fileConfig);
         
-        while (myReader.hasNextLine()) {
+        while (myReader.hasNextLine()) 
+        {
             String data = myReader.nextLine();
-            content += data + "\n";
+            content = content + (data + "\n");
         }
         
+
+
         myReader.close();
         
         System.out.println(ConsoleColors.ANSI_GREEN + "DONE! EXECUTING TASK..." + ConsoleColors.ANSI_RESET);
