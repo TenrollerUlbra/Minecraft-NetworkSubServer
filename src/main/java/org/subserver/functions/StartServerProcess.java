@@ -8,105 +8,69 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import static org.subserver.Main.main;
+
 public class StartServerProcess {
-    
     public static void startServerProcess(String name, String[] args, HashMap<String, ServerInfo> serversOnline) throws Exception {
         
         System.out.print("\033[H\033[2J");
-        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
-        System.out.println(ConsoleColors.ANSI_CYAN + "===========================================================" + ConsoleColors.ANSI_RESET);
+        
+        System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_YELLOW + "      SUBSERVER - CREATE A MINECRAFT NETWORK IN UNIQUE CONTAINER           " + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_YELLOW + "===========================================================" + ConsoleColors.ANSI_RESET);
         System.out.println();
-        System.out.println(ConsoleColors.ANSI_CYAN + "STATUS - VERIFING IF SERVER EXISTS" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_YELLOW + "STATUS - VERIFING IF SERVER EXISTS" + ConsoleColors.ANSI_RESET);
         
         File file = new File("./subservers/" + name);
         
         Thread.sleep(3000);
         
-        if (!file.exists()) 
-        {
+        if (!file.exists()) {
             System.out.println(ConsoleColors.ANSI_RED + "SERVER NOT FOUND. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-  
+            main(args);
             return;
         }
-        
         System.out.println(ConsoleColors.ANSI_GREEN + "STATUS - SERVER FOUND, VERIFYING IF SERVER IS ONLINE..." + ConsoleColors.ANSI_RESET);
-        
         Thread.sleep(1000);
-        
-        if (serversOnline.containsKey(name)) 
-        {
+        if (serversOnline.containsKey(name)) {
             System.out.println(ConsoleColors.ANSI_RED + "ERROR - SERVER IS ONLINE. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-           
+            main(args);
             return;
         }
-
         System.out.println(ConsoleColors.ANSI_GREEN + "STATUS - SERVER FOUND, READING CONFIG..." + ConsoleColors.ANSI_RESET);
-        
         Thread.sleep(1000);
-        
         File fileConfig = new File("./subservers/" + name + "/subserverprocess.conf");
-        
         if (!fileConfig.exists()) {
-            System.out.println(ConsoleColors.ANSI_RED + "ERROR - CONFIG FILE FOR THIS SERVER WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_RED + "ERROR - CONFIG NOT FOUND. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
             Thread.sleep(5000);
             System.out.print("\033[H\033[2J");
-           
+            main(args);
             return;
         }
-        
-        System.out.println(ConsoleColors.ANSI_GREEN + "STATUS - CHECKINF IF THERE IS A SERVER JAR IN THE FOLDER" + ConsoleColors.ANSI_RESET);
-
-        Thread.sleep(1000);
-
-        File fileJar = new File("./subservers/" + name + "/server.jar");
-
-        if (!fileJar.exists()) {
-            System.out.println(ConsoleColors.ANSI_RED + "ERROR - SERVER JAR WAS NOT FOUND. LEAVING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
-            Thread.sleep(5000);
-            System.out.print("\033[H\033[2J");
-          
-            return;
-        }
-
         String content = "";
-        
         Scanner myReader = new Scanner(fileConfig);
-        
-        while (myReader.hasNextLine()) 
-        {
+        while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            content = content + (data + "\n");
+            content += data + "\n";
         }
-        
-
-
         myReader.close();
-        
         System.out.println(ConsoleColors.ANSI_GREEN + "DONE! EXECUTING TASK..." + ConsoleColors.ANSI_RESET);
-        
         ProcessBuilder processBuilder = new ProcessBuilder(content.split("\n")[0].replace("SH_START=", "").split(" "));
-        
         processBuilder.directory(new File("./subservers/" + name + "/"));
-        
         Process process = processBuilder.start();
-        
         InputStream inputStream = process.getInputStream();
-        
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        
         String line;
-        
         while ((line = reader.readLine()) != null) {
             if (line.contains("You need to agree to the EULA in order to run the server. Go to eula.txt for more info.")) {
                 System.out.println(ConsoleColors.ANSI_RED + "ERROR - YOU NEED TO AGREE TO THE EULA IN ORDER TO RUN THE SERVER. GO TO EULA.TXT FOR MORE INFO. KILLING IN 5 SECONDS..." + ConsoleColors.ANSI_RESET);
                 Thread.sleep(5000);
                 System.out.print("\033[H\033[2J");
-               
+                main(args);
                 return;
             }
             if (line.contains("For help, type \"help\"")) {
@@ -117,7 +81,7 @@ public class StartServerProcess {
                 serversOnline.put(name, serverInfo);
                 Thread.sleep(5000);
                 System.out.print("\033[H\033[2J");
-             
+                main(args);
             }
             ServerInfo serverInfo = serversOnline.get(name);
             if (serverInfo != null && serverInfo.getLogs() != null) {

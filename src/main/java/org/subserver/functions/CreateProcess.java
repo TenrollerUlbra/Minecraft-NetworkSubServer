@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class CreateProcess {
 
-    public static void createProcess() throws IOException 
+    public static void createProcess(Scanner scanner) throws IOException 
     {
         File SubserversFolder = new File("./subservers");
         
@@ -23,7 +23,6 @@ public class CreateProcess {
         if (!SubserversFolder.exists()) {
             SubserversFolder.mkdir();
         }
-            Scanner scanner = new Scanner(System.in);
     
             System.out.print(ConsoleColors.ANSI_YELLOW + "Type the name of server: " + ConsoleColors.ANSI_RESET);
             

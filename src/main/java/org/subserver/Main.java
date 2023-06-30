@@ -59,6 +59,7 @@ public class Main {
         {
 
             System.out.print("\033[H\033[2J");
+            
             System.out.flush();
 
             ShowLogo();
@@ -82,7 +83,7 @@ public class Main {
             {
                 case "1": 
                 {
-                    createProcess();
+                    createProcess(scanner);
 
                     System.out.println(ConsoleColors.ANSI_GREEN + "Press enter to continue..." + ConsoleColors.ANSI_RESET);
 
